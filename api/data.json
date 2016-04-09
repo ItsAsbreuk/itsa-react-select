@@ -1,0 +1,362 @@
+{
+    "project": {
+        "name": "itsa-react-select",
+        "description": "React-Component: Select",
+        "logo": "https://avatars0.githubusercontent.com/u/8314644?v=3&s=84",
+        "version": "0.0.1"
+    },
+    "files": {
+        "lib/component.jsx": {
+            "name": "lib/component.jsx",
+            "modules": {
+                "itsa-react-select": 1
+            },
+            "classes": {
+                "Select": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "itsa-react-select": {
+            "name": "itsa-react-select",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Select": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/component.jsx",
+            "line": 3,
+            "description": "Nice select for react.\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/",
+            "since": "0.0.1"
+        }
+    },
+    "classes": {
+        "Select": {
+            "name": "Select",
+            "shortname": "Select",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "itsa-react-select",
+            "namespace": "",
+            "file": "lib/component.jsx",
+            "line": 3,
+            "description": "Nice select for react.\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/"
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "lib/component.jsx",
+            "line": 37,
+            "description": "Whether the component is disabled",
+            "itemtype": "property",
+            "name": "disabled",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 46,
+            "description": "The HTML that the select should show when no item is selected.\nDefaults \"Choose...\"",
+            "itemtype": "property",
+            "name": "emptyHTML",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 56,
+            "description": "The errormessage to show when the Select is not validated.",
+            "itemtype": "property",
+            "name": "errorMsg",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 65,
+            "description": "Whether the parent-form has been validated.\nThis value is needed to determine if the validate-status should be set.",
+            "itemtype": "property",
+            "name": "formValidated",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 75,
+            "description": "List with all the items, either as Strings or Objects.",
+            "itemtype": "property",
+            "name": "items",
+            "type": "Array",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 84,
+            "description": "The height of the select-list. If not set, then all items are shown without a scroller.",
+            "itemtype": "property",
+            "name": "listHeight",
+            "type": "Number",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 93,
+            "description": "Whether the Component should show an validate-reclamation (star)\nwhen it requires a selected item yet when there is no item selected.",
+            "itemtype": "property",
+            "name": "markValidated",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 103,
+            "description": "The `onChange` function, which should update the `state`.",
+            "itemtype": "property",
+            "name": "onChange",
+            "type": "Function",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 112,
+            "description": "Whether to Component requires a valid selection",
+            "itemtype": "property",
+            "name": "required",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 122,
+            "description": "componentDidMount does some initialization.",
+            "itemtype": "method",
+            "name": "componentDidMount",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 141,
+            "description": "componentWilUnmount does some cleanup.",
+            "itemtype": "method",
+            "name": "componentWillUnmount",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 158,
+            "description": "Sets the focus on the Component.",
+            "itemtype": "method",
+            "name": "focus",
+            "chainable": 1,
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 170,
+            "description": "Returns the default props.",
+            "itemtype": "method",
+            "name": "getDefaultProps",
+            "return": {
+                "description": "object"
+            },
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 187,
+            "description": "Returns the initial state.",
+            "itemtype": "method",
+            "name": "getInitialState",
+            "return": {
+                "description": "object"
+            },
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 201,
+            "description": "Callback-fn for the onClick-event.\nWill invoke `this.props.onChange`",
+            "itemtype": "method",
+            "name": "handleClick",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 249,
+            "description": "Callback-fn when an item is clicked",
+            "itemtype": "method",
+            "name": "handleItemClick",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 266,
+            "description": "Callback-fn when an item is scrolled by keys",
+            "itemtype": "method",
+            "name": "handleItemScroll",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 315,
+            "description": "Callback-fn for the onKeyDown-event.",
+            "itemtype": "method",
+            "name": "handleKeyDown",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 339,
+            "description": "Callback-fn for the onMouseDown-event.",
+            "itemtype": "method",
+            "name": "handleMouseDown",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 349,
+            "description": "Callback-fn for the onMouseUp-event.",
+            "itemtype": "method",
+            "name": "handleMouseUp",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 364,
+            "description": "React render-method --> renderes the Component.",
+            "itemtype": "method",
+            "name": "render",
+            "return": {
+                "description": "ReactComponent"
+            },
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 455,
+            "description": "Returns a html that represent the item as how it should be rendered.",
+            "itemtype": "method",
+            "name": "_defaultItemRenderer",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "String|Object",
+                    "description": "list-item"
+                }
+            ],
+            "return": {
+                "description": "String html that represent the item"
+            },
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 468,
+            "description": "Returns the ul-element that contains all li-elements.",
+            "itemtype": "method",
+            "name": "_getUlContainerNode",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Element"
+            },
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 482,
+            "description": "Callback for a click on the document. Is needed to close the Component when clicked outside.",
+            "itemtype": "method",
+            "name": "_handleDocumentClick",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "Object",
+                    "description": "e"
+                }
+            ],
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 500,
+            "description": "Returns a save string",
+            "itemtype": "method",
+            "name": "_saveHTML",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "String",
+                    "description": "html the text that should be removed from any html-entities"
+                }
+            ],
+            "return": {
+                "description": "String"
+            },
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        }
+    ],
+    "warnings": []
+}

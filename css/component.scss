@@ -1,0 +1,177 @@
+$active-shade: 0.4;
+$active-depth: 10px;
+$focus-background-color: #B3D4FF;
+$border-color: #CCC;
+$focus-border-color: #129FEA;
+$list-container-background-color: #FFF;
+$color-error-border: #FF6A6A;
+$color-error-text: #F34F4F;
+$background-color-error-text: #F9F9F9;
+$color-required-star: #FF6A6A;
+
+.itsa-select {
+    position: relative;
+    width: 15em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    .itsa-button {
+        width: 100% !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0.5em 1.2em 0.5em 0.6em !important;
+        border: 1px solid $border-color !important;
+        box-shadow: inset 0 1px 3px #ddd !important;
+        border-radius: 4px !important;
+        text-align: left !important;
+        background-color: #FFF !important;
+
+        &.itsa-button:active,
+        &.itsa-button-active {
+            box-shadow: 0 0 $active-depth rgba(0,0,0, $active-shade) inset !important;
+        }
+    }
+
+    .itsa-select-error {
+        border-color: $color-error-border !important;
+        -webkit-transition: all 0.2s ease-out 0s;
+        -moz-transition: all 0.2s ease-out 0s;
+        -ms-transition: all 0.2s ease-out 0s;
+        -o-transition: all 0.2s ease-out 0s;
+        transition: all 0.2s ease-out 0s;
+    }
+
+    .itsa-select-error-text {
+        color: $color-error-text;
+        font-size: 0.8em;
+        line-height: 1em;
+        margin: 0;
+        opacity: 1;
+        position: absolute;
+        z-index: 1;
+        background-color: $background-color-error-text;
+        border: 1px solid $color-error-border;
+        bottom: -0.7em;
+        left: auto;
+        padding: 0.15em 0.4em 0.1em;
+        right: 1.9em;
+        -webkit-transition: all 0.2s ease-out 0s;
+        -moz-transition: all 0.2s ease-out 0s;
+        -ms-transition: all 0.2s ease-out 0s;
+        -o-transition: all 0.2s ease-out 0s;
+        transition: all 0.2s ease-out 0s;
+    }
+
+    .itsa-select-required::after {
+        content: "*";
+        position: absolute;
+        font-size: 2em;
+        top: 0.13em;
+        right: 0.23em;
+        color: $color-required-star;
+    }
+
+    .itsa-button:after,
+    .itsa-button::after {
+        border-left: 0.4em solid rgba(0, 0, 0, 0);
+        border-right: 0.4em solid rgba(0, 0, 0, 0);
+        border-top: 0.5em solid #000;
+        position: absolute;
+        right: 0.25em;
+        bottom: 0.15em;
+        font-size: 1.2em;
+        content: "";
+        cursor: pointer;
+    }
+
+    .itsa-select-container {
+        position: relative;
+        -webkit-transition: opacity 0.1s;
+        -moz-transition: opacity 0.1s;
+        -ms-transition: opacity 0.1s;
+        -o-transition: opacity 0.1s;
+        transition: opacity 0.1s;
+        opacity: 0;
+        z-index: -1;
+
+        &.itsa-select-show {
+            -webkit-transition: opacity 0.2s;
+            -moz-transition: opacity 0.2s;
+            -ms-transition: opacity 0.2s;
+            -o-transition: opacity 0.2s;
+            transition: opacity 0.2s;
+            opacity: 1;
+            z-index: 2;
+        }
+    }
+
+    .itsa-select-container,
+    .itsa-select-container-sub,
+    ul {
+        display: block;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .itsa-select-container-sub {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-left: 0.2em;
+        min-width: 97%;
+        min-width: calc(100% - 0.4em);
+        cursor: pointer;
+        border: solid 0.1em $border-color;
+        -webkit-border-radius: 0 0 0.3em 0.3em;
+        -moz-border-radius: 0 0 0.3em 0.3em;
+        border-radius: 0 0 0.3em 0.3em;
+        -webkit-box-shadow: 0.3em 0.3em 5px rgba(0,0,0,0.15);
+        -moz-box-shadow: 0.3em 0.3em 5px rgba(0,0,0,0.15);
+        box-shadow: 0.3em 0.3em 5px rgba(0,0,0,0.15);
+        background-color: $list-container-background-color;
+        overflow: scroll;
+    }
+
+    ul {
+        padding: 0.2em 0 0.3em;
+        list-style: none;
+        margin: 0;
+    }
+
+    li {
+        padding: 0.2em 0.25em 0.2em 1em;
+        white-space: nowrap;
+        position: relative;
+        border: 1px solid transparent;
+    }
+
+    li:focus {
+        background-color: $focus-background-color;
+        border: 1px solid $focus-border-color;
+        outline: 0;
+    }
+
+    li:hover {
+        background-color: $focus-background-color;
+        border: 1px solid $focus-border-color;
+    }
+
+    li.selected:before {
+        content: '*';
+        font-size: 2em;
+        position: absolute;
+        left: 0.1em;
+        bottom: -0.4em;
+    }
+
+    li:before,
+    li:after {
+        content: '';
+        padding: 0;
+        margin: 0;
+    }
+
+
+}
