@@ -55,7 +55,29 @@
     "classitems": [
         {
             "file": "lib/component.jsx",
-            "line": 37,
+            "line": 38,
+            "description": "ClassName that should be set to the select-button",
+            "itemtype": "property",
+            "name": "btnClassName",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 47,
+            "description": "ClassName that should be set to the Element",
+            "itemtype": "property",
+            "name": "className",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 56,
             "description": "Whether the component is disabled",
             "itemtype": "property",
             "name": "disabled",
@@ -66,7 +88,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 46,
+            "line": 65,
             "description": "The HTML that the select should show when no item is selected.\nDefaults \"Choose...\"",
             "itemtype": "property",
             "name": "emptyHTML",
@@ -77,7 +99,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 56,
+            "line": 75,
             "description": "The errormessage to show when the Select is not validated.",
             "itemtype": "property",
             "name": "errorMsg",
@@ -88,7 +110,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 65,
+            "line": 84,
             "description": "Whether the parent-form has been validated.\nThis value is needed to determine if the validate-status should be set.",
             "itemtype": "property",
             "name": "formValidated",
@@ -99,7 +121,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 75,
+            "line": 94,
             "description": "List with all the items, either as Strings or Objects.",
             "itemtype": "property",
             "name": "items",
@@ -110,7 +132,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 84,
+            "line": 103,
             "description": "The height of the select-list. If not set, then all items are shown without a scroller.",
             "itemtype": "property",
             "name": "listHeight",
@@ -121,7 +143,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 93,
+            "line": 112,
             "description": "Whether the Component should show an validate-reclamation (star)\nwhen it requires a selected item yet when there is no item selected.",
             "itemtype": "property",
             "name": "markValidated",
@@ -132,7 +154,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 103,
+            "line": 122,
             "description": "The `onChange` function, which should update the `state`.",
             "itemtype": "property",
             "name": "onChange",
@@ -143,7 +165,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 112,
+            "line": 131,
             "description": "Whether to Component requires a valid selection",
             "itemtype": "property",
             "name": "required",
@@ -154,7 +176,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 122,
+            "line": 141,
             "description": "componentDidMount does some initialization.",
             "itemtype": "method",
             "name": "componentDidMount",
@@ -164,7 +186,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 141,
+            "line": 160,
             "description": "componentWilUnmount does some cleanup.",
             "itemtype": "method",
             "name": "componentWillUnmount",
@@ -174,7 +196,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 158,
+            "line": 177,
             "description": "Sets the focus on the Component.",
             "itemtype": "method",
             "name": "focus",
@@ -185,7 +207,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 170,
+            "line": 197,
             "description": "Returns the default props.",
             "itemtype": "method",
             "name": "getDefaultProps",
@@ -198,7 +220,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 187,
+            "line": 214,
             "description": "Returns the initial state.",
             "itemtype": "method",
             "name": "getInitialState",
@@ -211,7 +233,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 201,
+            "line": 228,
             "description": "Callback-fn for the onClick-event.\nWill invoke `this.props.onChange`",
             "itemtype": "method",
             "name": "handleClick",
@@ -221,7 +243,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 249,
+            "line": 282,
             "description": "Callback-fn when an item is clicked",
             "itemtype": "method",
             "name": "handleItemClick",
@@ -231,7 +253,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 266,
+            "line": 299,
             "description": "Callback-fn when an item is scrolled by keys",
             "itemtype": "method",
             "name": "handleItemScroll",
@@ -241,7 +263,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 315,
+            "line": 354,
             "description": "Callback-fn for the onKeyDown-event.",
             "itemtype": "method",
             "name": "handleKeyDown",
@@ -251,7 +273,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 339,
+            "line": 378,
             "description": "Callback-fn for the onMouseDown-event.",
             "itemtype": "method",
             "name": "handleMouseDown",
@@ -261,7 +283,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 349,
+            "line": 388,
             "description": "Callback-fn for the onMouseUp-event.",
             "itemtype": "method",
             "name": "handleMouseUp",
@@ -271,7 +293,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 364,
+            "line": 403,
             "description": "React render-method --> renderes the Component.",
             "itemtype": "method",
             "name": "render",
@@ -284,7 +306,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 455,
+            "line": 497,
             "description": "Returns a html that represent the item as how it should be rendered.",
             "itemtype": "method",
             "name": "_defaultItemRenderer",
@@ -305,7 +327,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 468,
+            "line": 510,
             "description": "Returns the ul-element that contains all li-elements.",
             "itemtype": "method",
             "name": "_getUlContainerNode",
@@ -320,7 +342,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 482,
+            "line": 524,
             "description": "Callback for a click on the document. Is needed to close the Component when clicked outside.",
             "itemtype": "method",
             "name": "_handleDocumentClick",
@@ -338,7 +360,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 500,
+            "line": 542,
             "description": "Returns a save string",
             "itemtype": "method",
             "name": "_saveHTML",

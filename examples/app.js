@@ -55,29 +55,24 @@
 	    ReactDOM = __webpack_require__(162),
 	    Component = __webpack_require__(163);
 
-	var Button = __webpack_require__(195);
-
 	props = {
-	    items: ["Marco Asbreuk", "Silke Asbreuk", "Karsten Asbreuk", "Monique Harbers", "Marco Asbreuk - 2", "Silke Asbreuk - 2", "Karsten Asbreuk - 2", "Monique Harbers - 2"],
+	    items: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+	    className: "months",
+	    emptyHTML: "Choose a Month...",
 	    onChange: function onChange(newSelected) {
 	        props.selected = newSelected;
 	        render();
 	    },
 
 	    required: true,
-	    formValidated: true,
-	    listHeight: '8em'
+	    markRequired: true
 	};
 
 	var render = function render() {
-	    component = ReactDOM.render(React.createElement(Component, props), document.getElementById("component-container"));
+	    ReactDOM.render(React.createElement(Component, props), document.getElementById("component-container"));
 	};
 
 	render();
-
-	component.focus();
-
-	ReactDOM.render(React.createElement(Button, { buttonText: "Choose..." }), document.getElementById("button-container"));
 
 /***/ },
 /* 1 */
@@ -20223,6 +20218,7 @@
 	    REQUIRED_MSG = "Selection is required",
 	    CLICK = 'click',
 	    KEY_TRANS_TIME = 250,
+	    BTN_REFOCES_TRANS_TIME = 500,
 	    DEF_BUTTON_PRESS_TIME = 300;
 
 	var Component = _react2.default.createClass({
@@ -20230,6 +20226,24 @@
 
 
 	    propTypes: {
+	        /**
+	         * ClassName that should be set to the select-button
+	         *
+	         * @property btnClassName
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        btnClassName: _react.PropTypes.string,
+
+	        /**
+	         * ClassName that should be set to the Element
+	         *
+	         * @property className
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        className: _react.PropTypes.string,
+
 	        /**
 	         * Whether the component is disabled
 	         *
@@ -20358,8 +20372,15 @@
 	     * @chainable
 	     * @since 0.0.1
 	     */
-	    focus: function focus() {
-	        this.refs.button.focus();
+	    focus: function focus(intoView, transitionTime) {
+	        var button = this.refs.button;
+	        var buttonNode = void 0;
+	        if (intoView) {
+	            buttonNode = _reactDom2.default.findDOMNode(button);
+	            buttonNode.itsa_focus(false, false, transitionTime);
+	        } else {
+	            button.focus();
+	        }
 	        return this;
 	    },
 
@@ -20408,7 +20429,8 @@
 	        var liNode = void 0,
 	            ulNode = void 0;
 	        var instance = this,
-	            selected = instance.props.selected,
+	            props = instance.props,
+	            selected = props.selected,
 	            simulatedClick = simulated === true,
 	            leftBtnClick = simulatedClick || simulated === 1,
 	            newExpanded = !instance.state.expanded;
@@ -20431,8 +20453,12 @@
 	                    ulNode = instance._getUlContainerNode();
 	                    liNode = ulNode.children[instance._preSelected];
 	                    if (liNode) {
-	                        liNode.focus();
-	                        liNode.itsa_forceIntoNodeView(ulNode.parentNode);
+	                        if (props.listHeight) {
+	                            liNode.focus();
+	                            liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
+	                        } else {
+	                            liNode.itsa_focus(false, false, KEY_TRANS_TIME);
+	                        }
 	                    }
 	                }
 
@@ -20457,7 +20483,7 @@
 	            node = e.target,
 	            item = node && node.getAttribute("data-id");
 	        instance.setState({ expanded: false });
-	        instance.focus();
+	        instance.focus(true, BTN_REFOCES_TRANS_TIME);
 	        if (item) {
 	            instance.props.onChange(parseInt(item, 10));
 	        }
@@ -20478,7 +20504,8 @@
 	        var instance = this,
 	            state = instance.state,
 	            keyCode = e.keyCode,
-	            selected = instance.props.selected;
+	            props = instance.props,
+	            selected = props.selected;
 
 	        if (keyCode === 40) {
 	            instance._preSelected++;
@@ -20507,8 +20534,12 @@
 	                instance._preSelected = 0;
 	            }
 	            liNode = ulNode.children[instance._preSelected];
-	            liNode.focus();
-	            liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
+	            if (props.listHeight) {
+	                liNode.focus();
+	                liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
+	            } else {
+	                liNode.itsa_focus(false, false, KEY_TRANS_TIME);
+	            }
 	        }
 	    },
 
@@ -20528,7 +20559,7 @@
 	            instance.setState({
 	                expanded: false
 	            });
-	            instance.focus(); // in case the focus was on a listitem
+	            instance.focus(true, BTN_REFOCES_TRANS_TIME); // in case the focus was on a listitem
 	        } else if ((keyCode === 40 || keyCode === 32) && !state.expanded) {
 	                // prevent minus windowscroll:
 	                e.preventDefault();
@@ -20583,8 +20614,10 @@
 	            hasSelection = selected !== undefined && selected < items.length,
 	            required = props.required,
 	            disabled = props.disabled,
-	            errored = props.formValidated && required && !hasSelection;
-	        var buttonClass = props.className,
+	            errored = !expanded && props.formValidated && required && !hasSelection;
+	        var className = props.className,
+	            buttonClass = props.btnClassName,
+	            elementClass = MAIN_CLASS,
 	            containerClass = MAIN_CLASS_PREFIX + CONTAINER,
 	            containerSubClass = containerClass + _SUB,
 	            listItems = void 0,
@@ -20640,11 +20673,12 @@
 	            handleKeyDown = instance.handleKeyDown;
 	            handleMouseDown = instance.handleMouseDown;
 	        }
+	        className && (elementClass += " " + className);
 	        return _react2.default.createElement(
 	            "div",
 	            {
 	                "aria-required": ariaRequired,
-	                className: MAIN_CLASS,
+	                className: elementClass,
 	                onKeyDown: handleKeyDown,
 	                onMouseDown: handleMouseDown,
 	                onMouseUp: instance.handleMouseUp },
@@ -22458,6 +22492,21 @@
 	        };
 
 	        /**
+	         * Focusses the node (if focussable), and forces the Element to be inside the visible window.
+	         *
+	         * @method itsa_focus
+	         * @param [atTop] {Element} the Element where it should be forced into its view.
+	         * @param [atLeft] {Element} the Element where it should be forced into its view.
+	         * @param [transitionTime] {Element} the Element where it should be forced into its view.
+	         * @chainable
+	         * @since 0.0.1
+	         */
+	        ElementPrototype.itsa_focus = function (atTop, atLeft, transitionTime) {
+	            this.focus();
+	            this.itsa_scrollIntoView(atTop, atLeft, transitionTime);
+	        };
+
+	        /**
 	         * Gets an ElementArray of Elements that lie within this Element and match the css-selector.
 	         *
 	         * @method itsa_getAll
@@ -24050,15 +24099,6 @@
 
 	    return transitionEnd;
 	};
-
-/***/ },
-/* 195 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	__webpack_require__(164);
-	module.exports = __webpack_require__(169);
 
 /***/ }
 /******/ ]);

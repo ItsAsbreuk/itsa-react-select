@@ -29,11 +29,30 @@ const MAIN_CLASS = "itsa-select",
       REQUIRED_MSG = "Selection is required",
       CLICK = 'click',
       KEY_TRANS_TIME = 250,
+      BTN_REFOCES_TRANS_TIME = 500,
       DEF_BUTTON_PRESS_TIME = 300;
 
 const Component = React.createClass({
 
     propTypes: {
+        /**
+         * ClassName that should be set to the select-button
+         *
+         * @property btnClassName
+         * @type String
+         * @since 0.0.1
+        */
+        btnClassName: PropTypes.string,
+
+        /**
+         * ClassName that should be set to the Element
+         *
+         * @property className
+         * @type String
+         * @since 0.0.1
+        */
+        className: PropTypes.string,
+
         /**
          * Whether the component is disabled
          *
@@ -162,8 +181,16 @@ const Component = React.createClass({
      * @chainable
      * @since 0.0.1
      */
-    focus() {
-        this.refs.button.focus();
+    focus(intoView, transitionTime) {
+        const button = this.refs.button;
+        let buttonNode;
+        if (intoView) {
+            buttonNode = ReactDOM.findDOMNode(button);
+            buttonNode.itsa_focus(false, false, transitionTime);
+        }
+        else {
+            button.focus();
+        }
         return this;
     },
 
@@ -208,7 +235,8 @@ const Component = React.createClass({
     handleClick(simulated) {
         let liNode, ulNode;
         const instance = this,
-              selected = instance.props.selected,
+              props = instance.props,
+              selected = props.selected,
               simulatedClick = (simulated===true),
               leftBtnClick = simulatedClick || (simulated===1),
               newExpanded = !instance.state.expanded;
@@ -232,8 +260,13 @@ const Component = React.createClass({
                     ulNode = instance._getUlContainerNode();
                     liNode = ulNode.children[instance._preSelected];
                     if (liNode) {
-                        liNode.focus();
-                        liNode.itsa_forceIntoNodeView(ulNode.parentNode);
+                        if (props.listHeight) {
+                            liNode.focus();
+                            liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
+                        }
+                        else {
+                            liNode.itsa_focus(false, false, KEY_TRANS_TIME);
+                        }
                     }
                 }
 
@@ -257,7 +290,7 @@ const Component = React.createClass({
               node = e.target,
               item = node && node.getAttribute("data-id");
         instance.setState({expanded: false});
-        instance.focus();
+        instance.focus(true, BTN_REFOCES_TRANS_TIME);
         if (item) {
             instance.props.onChange(parseInt(item, 10));
         }
@@ -274,7 +307,8 @@ const Component = React.createClass({
         const instance = this,
               state = instance.state,
               keyCode = e.keyCode,
-              selected = instance.props.selected;
+              props = instance.props,
+              selected = props.selected;
 
         if (keyCode===40) {
             instance._preSelected++;
@@ -307,8 +341,13 @@ const Component = React.createClass({
                 instance._preSelected = 0;
             }
             liNode = ulNode.children[instance._preSelected];
-            liNode.focus();
-            liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
+            if (props.listHeight) {
+                liNode.focus();
+                liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
+            }
+            else {
+                liNode.itsa_focus(false, false, KEY_TRANS_TIME);
+            }
         }
     },
 
@@ -327,7 +366,7 @@ const Component = React.createClass({
             instance.setState({
                 expanded: false
             });
-            instance.focus(); // in case the focus was on a listitem
+            instance.focus(true, BTN_REFOCES_TRANS_TIME); // in case the focus was on a listitem
         }
         else if (((keyCode===40) || (keyCode===32)) && !(state.expanded)) {
             // prevent minus windowscroll:
@@ -380,8 +419,10 @@ const Component = React.createClass({
               hasSelection = (selected!==undefined) && (selected<items.length),
               required = props.required,
               disabled = props.disabled,
-              errored = (props.formValidated && required && !hasSelection);
-        let buttonClass = props.className,
+              errored = !expanded && props.formValidated && required && !hasSelection;
+        let className = props.className,
+            buttonClass = props.btnClassName,
+            elementClass = MAIN_CLASS,
             containerClass = MAIN_CLASS_PREFIX+CONTAINER,
             containerSubClass = containerClass+_SUB,
             listItems, buttonHTML, tabIndex, itemScroll, handleItemClick, errorMsg,
@@ -423,10 +464,11 @@ const Component = React.createClass({
             handleKeyDown = instance.handleKeyDown;
             handleMouseDown = instance.handleMouseDown;
         }
+        className && (elementClass+=" "+className);
         return (
             <div
                 aria-required={ariaRequired}
-                className={MAIN_CLASS}
+                className={elementClass}
                 onKeyDown={handleKeyDown}
                 onMouseDown={handleMouseDown}
                 onMouseUp={instance.handleMouseUp}>
