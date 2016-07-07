@@ -55,7 +55,18 @@
     "classitems": [
         {
             "file": "lib/component.jsx",
-            "line": 38,
+            "line": 43,
+            "description": "Whether to autofocus the Component.",
+            "itemtype": "property",
+            "name": "autoFocus",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 52,
             "description": "ClassName that should be set to the select-button",
             "itemtype": "property",
             "name": "btnClassName",
@@ -66,7 +77,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 47,
+            "line": 61,
             "description": "ClassName that should be set to the Element",
             "itemtype": "property",
             "name": "className",
@@ -77,7 +88,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 56,
+            "line": 70,
             "description": "Whether the component is disabled",
             "itemtype": "property",
             "name": "disabled",
@@ -88,7 +99,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 65,
+            "line": 79,
             "description": "The HTML that the select should show when no item is selected.\nDefaults \"Choose...\"",
             "itemtype": "property",
             "name": "emptyHTML",
@@ -99,7 +110,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 75,
+            "line": 89,
             "description": "The errormessage to show when the Select is not validated.",
             "itemtype": "property",
             "name": "errorMsg",
@@ -110,7 +121,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 84,
+            "line": 98,
             "description": "Whether the parent-form has been validated.\nThis value is needed to determine if the validate-status should be set.",
             "itemtype": "property",
             "name": "formValidated",
@@ -121,7 +132,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 94,
+            "line": 108,
             "description": "List with all the items, either as Strings or Objects.",
             "itemtype": "property",
             "name": "items",
@@ -132,7 +143,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 103,
+            "line": 117,
             "description": "The height of the select-list. If not set, then all items are shown without a scroller.",
             "itemtype": "property",
             "name": "listHeight",
@@ -143,7 +154,19 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 112,
+            "line": 126,
+            "description": "Whether the loop the items when the last/first item is reached.",
+            "itemtype": "property",
+            "name": "loop",
+            "default": "false",
+            "type": "Boolean",
+            "since": "15.0.0",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 136,
             "description": "Whether the Component should show an validate-reclamation (star)\nwhen it requires a selected item yet when there is no item selected.",
             "itemtype": "property",
             "name": "markValidated",
@@ -154,7 +177,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 122,
+            "line": 146,
             "description": "The `onChange` function, which should update the `state`.",
             "itemtype": "property",
             "name": "onChange",
@@ -165,7 +188,19 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 131,
+            "line": 155,
+            "description": "Whether the checkbox is readonly",
+            "itemtype": "property",
+            "name": "readOnly",
+            "type": "Boolean",
+            "default": "false",
+            "since": "15.2.0",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 165,
             "description": "Whether to Component requires a valid selection",
             "itemtype": "property",
             "name": "required",
@@ -176,7 +211,30 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 141,
+            "line": 174,
+            "description": "The index that is selected",
+            "itemtype": "property",
+            "name": "readOnly",
+            "type": "number",
+            "default": "null",
+            "since": "15.2.0",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 184,
+            "description": "Inline style",
+            "itemtype": "property",
+            "name": "style",
+            "type": "object",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 194,
             "description": "componentDidMount does some initialization.",
             "itemtype": "method",
             "name": "componentDidMount",
@@ -186,7 +244,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 160,
+            "line": 216,
             "description": "componentWilUnmount does some cleanup.",
             "itemtype": "method",
             "name": "componentWillUnmount",
@@ -196,7 +254,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 177,
+            "line": 234,
             "description": "Sets the focus on the Component.",
             "itemtype": "method",
             "name": "focus",
@@ -207,7 +265,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 197,
+            "line": 254,
             "description": "Returns the default props.",
             "itemtype": "method",
             "name": "getDefaultProps",
@@ -220,7 +278,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 214,
+            "line": 275,
             "description": "Returns the initial state.",
             "itemtype": "method",
             "name": "getInitialState",
@@ -233,7 +291,24 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 228,
+            "line": 289,
+            "description": "Callback that sets the focus to the descendent element by calling `focus()`",
+            "itemtype": "method",
+            "name": "handleContainerFocus",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "event-payload",
+                    "type": "Object"
+                }
+            ],
+            "since": "0.1.0",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 300,
             "description": "Callback-fn for the onClick-event.\nWill invoke `this.props.onChange`",
             "itemtype": "method",
             "name": "handleClick",
@@ -243,7 +318,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 282,
+            "line": 330,
             "description": "Callback-fn when an item is clicked",
             "itemtype": "method",
             "name": "handleItemClick",
@@ -253,7 +328,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 299,
+            "line": 350,
             "description": "Callback-fn when an item is scrolled by keys",
             "itemtype": "method",
             "name": "handleItemScroll",
@@ -263,7 +338,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 354,
+            "line": 365,
             "description": "Callback-fn for the onKeyDown-event.",
             "itemtype": "method",
             "name": "handleKeyDown",
@@ -273,7 +348,17 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 378,
+            "line": 393,
+            "description": "Callback-fn for the onKeyUp-event.",
+            "itemtype": "method",
+            "name": "handleKeyUp",
+            "since": "0.0.1",
+            "class": "Select",
+            "module": "itsa-react-select"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 403,
             "description": "Callback-fn for the onMouseDown-event.",
             "itemtype": "method",
             "name": "handleMouseDown",
@@ -283,7 +368,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 388,
+            "line": 416,
             "description": "Callback-fn for the onMouseUp-event.",
             "itemtype": "method",
             "name": "handleMouseUp",
@@ -293,7 +378,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 403,
+            "line": 431,
             "description": "React render-method --> renderes the Component.",
             "itemtype": "method",
             "name": "render",
@@ -306,7 +391,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 497,
+            "line": 542,
             "description": "Returns a html that represent the item as how it should be rendered.",
             "itemtype": "method",
             "name": "_defaultItemRenderer",
@@ -327,7 +412,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 510,
+            "line": 555,
             "description": "Returns the ul-element that contains all li-elements.",
             "itemtype": "method",
             "name": "_getUlContainerNode",
@@ -342,7 +427,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 524,
+            "line": 569,
             "description": "Callback for a click on the document. Is needed to close the Component when clicked outside.",
             "itemtype": "method",
             "name": "_handleDocumentClick",
@@ -360,7 +445,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 542,
+            "line": 587,
             "description": "Returns a save string",
             "itemtype": "method",
             "name": "_saveHTML",

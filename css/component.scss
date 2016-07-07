@@ -27,10 +27,16 @@ $color-required-star: #FF6A6A;
         text-align: left !important;
         background-color: #FFF !important;
 
-        &.itsa-button:active,
-        &.itsa-button-active {
+        &.itsa-button:active:not([disabled]):not(.readonly),
+        &.itsa-button-active:not([disabled]):not(.readonly) {
             box-shadow: 0 0 $active-depth rgba(0,0,0, $active-shade) inset !important;
         }
+    }
+
+    .itsa-button.readonly {
+        background-color: #eee !important;
+        border-color: #ccc !important;
+        color: #777 !important;
     }
 
     .itsa-select-error {
@@ -63,6 +69,7 @@ $color-required-star: #FF6A6A;
         transition: all 0.2s ease-out 0s;
     }
 
+    .itsa-select-required:after,
     .itsa-select-required::after {
         content: "*";
         position: absolute;
@@ -83,6 +90,13 @@ $color-required-star: #FF6A6A;
         font-size: 1.2em;
         content: "";
         cursor: pointer;
+    }
+
+    .itsa-button.readonly:after,
+    .itsa-button.readonly::after {
+        border-left: 0.4em solid rgba(119, 119, 119, 0);
+        border-right: 0.4em solid rgba(119, 119, 119, 0);
+        border-top: 0.5em solid #777;
     }
 
     .itsa-select-container {

@@ -97,27 +97,41 @@
  * @since 0.0.1
 */
 
-import React, {PropTypes} from &quot;react&quot;;
-import ReactDOM from &quot;react-dom&quot;;
-import Button from &quot;itsa-react-button&quot;;
-import {async, later} from &quot;itsa-utils&quot;;
-import &quot;itsa-dom&quot;;
+require(&quot;itsa-dom&quot;);
 
-const MAIN_CLASS = &quot;itsa-select&quot;,
-      MAIN_CLASS_PREFIX = MAIN_CLASS+&quot;-&quot;,
-      SPACED_MAIN_CLASS_PREFIX = &quot; &quot;+MAIN_CLASS_PREFIX,
-      CONTAINER = &quot;container&quot;,
-      _SUB = &quot;-sub&quot;,
-      EMPTY_HTML = &quot;Choose...&quot;,
-      REQUIRED_MSG = &quot;Selection is required&quot;,
-      CLICK = &#x27;click&#x27;,
-      KEY_TRANS_TIME = 250,
-      BTN_REFOCES_TRANS_TIME = 500,
-      DEF_BUTTON_PRESS_TIME = 300;
+const React = require(&quot;react&quot;),
+    PropTypes = React.PropTypes,
+    ReactDOM = require(&quot;react-dom&quot;),
+    FocusContainer = require(&quot;itsa-react-focuscontainer&quot;),
+    Button = require(&quot;itsa-react-button&quot;),
+    utils = require(&quot;itsa-utils&quot;),
+    later = utils.later,
+    async = utils.async,
+    MAIN_CLASS = &quot;itsa-select&quot;,
+    MAIN_CLASS_PREFIX = MAIN_CLASS+&quot;-&quot;,
+    SPACED_MAIN_CLASS_PREFIX = &quot; &quot;+MAIN_CLASS_PREFIX,
+    FORM_ELEMENT_CLASS_SPACES = &quot; itsa-formelement&quot;,
+    CONTAINER = &quot;container&quot;,
+    _SUB = &quot;-sub&quot;,
+    EMPTY_HTML = &quot;Choose...&quot;,
+    REQUIRED_MSG = &quot;Selection is required&quot;,
+    CLICK = &quot;click&quot;,
+    KEY_TRANS_TIME = 250,
+    BTN_REFOCES_TRANS_TIME = 500,
+    DEF_BUTTON_PRESS_TIME = 300;
 
 const Component = React.createClass({
 
     propTypes: {
+        /**
+         * Whether to autofocus the Component.
+         *
+         * @property autoFocus
+         * @type Boolean
+         * @since 0.0.1
+        */
+        autoFocus: PropTypes.bool,
+
         /**
          * ClassName that should be set to the select-button
          *
@@ -193,6 +207,16 @@ const Component = React.createClass({
         listHeight: PropTypes.string,
 
         /**
+         * Whether the loop the items when the last/first item is reached.
+         *
+         * @property loop
+         * @default false
+         * @type Boolean
+         * @since 15.0.0
+        */
+        loop: PropTypes.bool,
+
+        /**
          * Whether the Component should show an validate-reclamation (star)
          * when it requires a selected item yet when there is no item selected.
          *
@@ -212,13 +236,42 @@ const Component = React.createClass({
         onChange: PropTypes.func.isRequired,
 
         /**
+         * Whether the checkbox is readonly
+         *
+         * @property readOnly
+         * @type Boolean
+         * @default false
+         * @since 15.2.0
+        */
+        readOnly: PropTypes.bool,
+
+        /**
          * Whether to Component requires a valid selection
          *
          * @property required
          * @type Boolean
          * @since 0.0.1
         */
-        required: PropTypes.bool
+        required: PropTypes.bool,
+
+        /**
+         * The index that is selected
+         *
+         * @property readOnly
+         * @type number
+         * @default null
+         * @since 15.2.0
+        */
+        selected: PropTypes.number,
+
+        /**
+         * Inline style
+         *
+         * @property style
+         * @type object
+         * @since 0.0.1
+        */
+        style: PropTypes.object
     },
 
     /**
@@ -231,12 +284,15 @@ const Component = React.createClass({
         const instance = this;
         instance._componentNode = ReactDOM.findDOMNode(instance);
         // set outside clickHandler which watches for outside clicks that will collapse the component:
-        instance.IE8_Events = !instance._componentNode.addEventListener;
-        if (instance.IE8_Events) {
-            document.attachEvent(&#x27;on&#x27;+CLICK, instance._handleDocumentClick);
+        instance.IE8_EVENTS = !instance._componentNode.addEventListener;
+        if (instance.IE8_EVENTS) {
+            document.attachEvent(&quot;on&quot;+CLICK, instance._handleDocumentClick);
         }
         else {
             document.addEventListener(CLICK, instance._handleDocumentClick, true);
+        }
+        if (instance.props.autoFocus) {
+            instance._focusLater = later(() =&gt; instance.focus(), 50);
         }
     },
 
@@ -249,7 +305,8 @@ const Component = React.createClass({
     componentWillUnmount() {
         const instance = this;
         instance._removeTimer &amp;&amp; instance._removeTimer.cancel();
-        if (instance.IE8_Events) {
+        this._focusLater &amp;&amp; this._focusLater.cancel();
+        if (instance.IE8_EVENTS) {
             document.detachEvent(&quot;on&quot;+CLICK, instance._handleDocumentClick);
         }
         else {
@@ -286,12 +343,16 @@ const Component = React.createClass({
      */
     getDefaultProps() {
         return {
+            autoFocus: false,
+            disabled: false,
             emptyHTML: EMPTY_HTML,
             errorMsg: REQUIRED_MSG,
             formValidated: false,
+            loop: false,
             markRequired: false,
+            readOnly: false,
             required: false
-        }
+        };
     },
 
     /**
@@ -309,6 +370,17 @@ const Component = React.createClass({
     },
 
     /**
+     * Callback that sets the focus to the descendent element by calling &#x60;focus()&#x60;
+     *
+     * @method handleContainerFocus
+     * @param e {Object} event-payload
+     * @since 0.1.0
+     */
+    handleContainerFocus(e) {
+        (e.target===e.currentTarget) &amp;&amp; this.focus();
+    },
+
+    /**
      * Callback-fn for the onClick-event.
      * Will invoke &#x60;this.props.onChange&#x60;
      *
@@ -316,43 +388,19 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     handleClick(simulated) {
-        let liNode, ulNode;
         const instance = this,
-              props = instance.props,
-              selected = props.selected,
-              simulatedClick = (simulated===true),
-              leftBtnClick = simulatedClick || (simulated===1),
-              newExpanded = !instance.state.expanded;
-        if (leftBtnClick) {
+            props = instance.props,
+            simulatedClick = (simulated===true),
+            newExpanded = !instance.state.expanded;
+        if (!props.disabled &amp;&amp; !props.readOnly) {
             instance.setState({
                 expanded: newExpanded,
                 btnPressed: true
             });
             instance._removeTimer &amp;&amp; instance._removeTimer.cancel();
+            instance.refs.focuscontainer.focusActiveElement();
             // need to go async --&gt; handleClick goes so quick, that is is before handleMouseDown
-            // also, we can focus the right li-item only when there was a sync()
             async(() =&gt; {
-                // item.focus();
-                if (newExpanded) {
-                    if (selected!==undefined) {
-                        instance._preSelected = selected; // the item that has keyboard-focus
-                    }
-                    else {
-                        instance._preSelected = 0;
-                    }
-                    ulNode = instance._getUlContainerNode();
-                    liNode = ulNode.children[instance._preSelected];
-                    if (liNode) {
-                        if (props.listHeight) {
-                            liNode.focus();
-                            liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
-                        }
-                        else {
-                            liNode.itsa_focus(false, false, KEY_TRANS_TIME);
-                        }
-                    }
-                }
-
                 if (!instance._mouseDown &amp;&amp; !simulatedClick) {
                     instance._removeTimer = later(() =&gt; {
                         instance.setState({btnPressed: false});
@@ -370,12 +418,15 @@ const Component = React.createClass({
      */
     handleItemClick(e) {
         const instance = this,
-              node = e.target,
-              item = node &amp;&amp; node.getAttribute(&quot;data-id&quot;);
-        instance.setState({expanded: false});
-        instance.focus(true, BTN_REFOCES_TRANS_TIME);
-        if (item) {
-            instance.props.onChange(parseInt(item, 10));
+            node = e.target,
+            props = instance.props,
+            item = node &amp;&amp; node.getAttribute(&quot;data-id&quot;);
+        if (!props.disabled &amp;&amp; !props.readOnly &amp;&amp; !this._buttonDown) {
+            instance.setState({expanded: false});
+            instance.focus(true, BTN_REFOCES_TRANS_TIME);
+            if (item) {
+                instance.props.onChange(parseInt(item, 10));
+            }
         }
     },
 
@@ -386,51 +437,11 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     handleItemScroll(e) {
-        let len, liNode, ulNode, refocus;
         const instance = this,
-              state = instance.state,
-              keyCode = e.keyCode,
-              props = instance.props,
-              selected = props.selected;
-
-        if (keyCode===40) {
-            instance._preSelected++;
-            refocus = true;
-        }
-        else if (keyCode===38) {
-            instance._preSelected--;
-            refocus = true;
-        }
-        else if (keyCode===13) {
-            e.preventDefault();
-            ulNode = instance._getUlContainerNode();
-            liNode = ulNode.children[instance._preSelected];
-            instance.handleItemClick({target: liNode});
-        }
-        else if ((keyCode===8) || (keyCode===9)) {
-            e.preventDefault();
-            ulNode = instance._getUlContainerNode();
-            liNode = ulNode.children[selected];
-            instance.handleItemClick({target: liNode});
-        }
-        if (refocus) {
-            e.preventDefault();
-            ulNode = instance._getUlContainerNode();
-            len = ulNode.children.length;
-            if (instance._preSelected&gt;(len-1)) {
-                instance._preSelected = len-1;
-            }
-            else if (instance._preSelected&lt;0) {
-                instance._preSelected = 0;
-            }
-            liNode = ulNode.children[instance._preSelected];
-            if (props.listHeight) {
-                liNode.focus();
-                liNode.itsa_forceIntoNodeView(ulNode.parentNode, KEY_TRANS_TIME);
-            }
-            else {
-                liNode.itsa_focus(false, false, KEY_TRANS_TIME);
-            }
+            keyCode = e.keyCode,
+            props = instance.props;
+        if (!props.disabled &amp;&amp; !props.readOnly &amp;&amp; (keyCode===13)) {
+            instance.handleItemClick({target: document.activeElement});
         }
     },
 
@@ -442,20 +453,34 @@ const Component = React.createClass({
      */
     handleKeyDown(e) {
         const instance = this,
-              state = instance.state,
-              keyCode = e.keyCode;
+            props = instance.props,
+            state = instance.state,
+            keyCode = e.keyCode;
 
-        if ((keyCode===27) &amp;&amp; (state.expanded)) {
-            instance.setState({
-                expanded: false
-            });
-            instance.focus(true, BTN_REFOCES_TRANS_TIME); // in case the focus was on a listitem
+        if (!props.disabled &amp;&amp; !props.readOnly &amp;&amp; !instance._buttonDown) {
+            if ((keyCode===27) &amp;&amp; (state.expanded)) {
+                instance.setState({
+                    expanded: false
+                });
+                instance.focus(true, BTN_REFOCES_TRANS_TIME); // in case the focus was on a listitem
+            }
+            else if (((keyCode===40) || (keyCode===32)) &amp;&amp; !(state.expanded)) {
+                // prevent minus windowscroll:
+                e.preventDefault();
+                instance.handleClick(true);
+            }
         }
-        else if (((keyCode===40) || (keyCode===32)) &amp;&amp; !(state.expanded)) {
-            // prevent minus windowscroll:
-            e.preventDefault();
-            instance.handleClick(true);
-        }
+        instance._buttonDown = true;
+    },
+
+    /**
+     * Callback-fn for the onKeyUp-event.
+     *
+     * @method handleKeyUp
+     * @since 0.0.1
+     */
+    handleKeyUp() {
+        this._buttonDown = false;
     },
 
     /**
@@ -465,7 +490,10 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     handleMouseDown() {
-        this._mouseDown = true;
+        const props = this.props;
+        if (!props.disabled &amp;&amp; !props.readOnly) {
+            this._mouseDown = true;
+        }
     },
 
     /**
@@ -492,24 +520,25 @@ const Component = React.createClass({
      */
     render() {
         const instance = this,
-              props = instance.props,
-              state = instance.state,
-              expanded = state.expanded,
-              itemRenderer = props.itemRenderer || instance._defaultItemRenderer,
-              containerStyles = {height: props.listHeight},
-              selected = props.selected,
-              items = props.items,
-              hasSelection = (selected!==undefined) &amp;&amp; (selected&lt;items.length),
-              required = props.required,
-              disabled = props.disabled,
-              errored = !expanded &amp;&amp; props.formValidated &amp;&amp; required &amp;&amp; !hasSelection;
+            props = instance.props,
+            state = instance.state,
+            disabled = props.disabled,
+            readOnly = props.readOnly,
+            expanded = state.expanded &amp;&amp; !disabled &amp;&amp; !readOnly,
+            itemRenderer = props.itemRenderer || instance._defaultItemRenderer,
+            containerStyles = {height: props.listHeight},
+            selected = props.selected,
+            items = props.items,
+            hasSelection = (typeof selected===&quot;number&quot;) &amp;&amp; (selected&gt;=0) &amp;&amp; (selected&lt;items.length),
+            required = props.required,
+            errored = !expanded &amp;&amp; props.formValidated &amp;&amp; required &amp;&amp; !hasSelection;
         let className = props.className,
             buttonClass = props.btnClassName,
-            elementClass = MAIN_CLASS,
+            elementClass = MAIN_CLASS+FORM_ELEMENT_CLASS_SPACES,
             containerClass = MAIN_CLASS_PREFIX+CONTAINER,
             containerSubClass = containerClass+_SUB,
-            listItems, buttonHTML, tabIndex, itemScroll, handleItemClick, errorMsg,
-            ariaRequired, requiredMsg, handleKeyDown, handleMouseDown;
+            listItems, buttonHTML, tabIndex, itemScroll, handleItemClick, errorMsg, handleKeyUp,
+            ariaRequired, requiredMsg, handleKeyDown, handleMouseDown, handleContainerFocus;
         if (expanded) {
             tabIndex = 0; // making li-tiems focussable
             containerClass += &quot; &quot;+MAIN_CLASS_PREFIX+&quot;show&quot;;
@@ -529,10 +558,11 @@ const Component = React.createClass({
             }
             ariaLabel = instance._saveHTML(renderedItem);
             dangerouslySetInnerHTML = {__html: renderedItem};
-            return &lt;li aria-label={ariaLabel} data-id={i} className={classname} dangerouslySetInnerHTML={dangerouslySetInnerHTML} key={i} role=&quot;listitem&quot; tabIndex={tabIndex} /&gt;;
+            return (&lt;li aria-label={ariaLabel} className={classname} dangerouslySetInnerHTML={dangerouslySetInnerHTML}
+                data-id={i} key={i} role=&quot;listitem&quot; tabIndex={tabIndex} /&gt;);
         });
         buttonHTML || (buttonHTML=props.emptyHTML);
-        if (!disabled &amp;&amp; (state.btnPressed || expanded)) {
+        if (!disabled &amp;&amp; !readOnly &amp;&amp; (state.btnPressed || expanded)) {
             buttonClass = buttonClass ? buttonClass+&quot; &quot;+&quot;itsa-button-active&quot; : &quot;itsa-button-active&quot;;
         }
         if (errored) {
@@ -543,33 +573,48 @@ const Component = React.createClass({
             requiredMsg = (&lt;div className={MAIN_CLASS_PREFIX+&quot;required&quot;} /&gt;);
             ariaRequired = true;
         }
-        if (!disabled) {
+        if (!disabled &amp;&amp; !readOnly) {
             handleKeyDown = instance.handleKeyDown;
+            handleKeyUp = instance.handleKeyUp;
             handleMouseDown = instance.handleMouseDown;
+            handleContainerFocus = instance.handleContainerFocus;
         }
         className &amp;&amp; (elementClass+=&quot; &quot;+className);
+        disabled &amp;&amp; (elementClass+=&quot; disabled&quot;);
+        readOnly &amp;&amp; (elementClass+=&quot; readonly&quot;);
         return (
             &lt;div
                 aria-required={ariaRequired}
                 className={elementClass}
+                onFocus={handleContainerFocus}
                 onKeyDown={handleKeyDown}
+                onKeyUp={handleKeyUp}
                 onMouseDown={handleMouseDown}
-                onMouseUp={instance.handleMouseUp}&gt;
+                onMouseUp={instance.handleMouseUp}
+                style={props.style} &gt;
                 &lt;Button
                     {...props}
                     buttonHTML={buttonHTML}
                     className={buttonClass}
                     disabled={disabled}
                     onClick={instance.handleClick}
+                    readOnly={props.readOnly}
                     ref=&quot;button&quot; /&gt;
                 &lt;div className={containerClass} onKeyDown={itemScroll}&gt;
-                    &lt;div className={containerSubClass} style={containerStyles}&gt;
+                    &lt;FocusContainer
+                        className={containerSubClass}
+                        keyDown={40}
+                        keyUp={38}
+                        loop={props.loop}
+                        ref=&quot;focuscontainer&quot;
+                        selector=&quot;li[role=&#x27;listitem&#x27;]&quot;
+                        style={containerStyles} &gt;
                         &lt;ul
                             onClick={handleItemClick}
                             role=&quot;list&quot;&gt;
                             {listItems}
                         &lt;/ul&gt;
-                    &lt;/div&gt;
+                    &lt;/FocusContainer&gt;
                 &lt;/div&gt;
                 {requiredMsg}
                 {errorMsg}
@@ -600,7 +645,7 @@ const Component = React.createClass({
      */
     _getUlContainerNode() {
         const instance = this;
-        instance._ulNode || (instance._ulNode=instance._componentNode.getElementsByTagName(&#x27;ul&#x27;)[0]);
+        instance._ulNode || (instance._ulNode=instance._componentNode.getElementsByTagName(&quot;ul&quot;)[0]);
         return instance._ulNode;
     },
 
@@ -614,7 +659,7 @@ const Component = React.createClass({
      */
     _handleDocumentClick(e) {
         const instance = this,
-              targetNode = e.target;
+            targetNode = e.target;
         if ((instance._componentNode!==targetNode) &amp;&amp; !instance._componentNode.contains(targetNode)) {
             instance.setState({
                 expanded: false
@@ -632,7 +677,7 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     _saveHTML(html) {
-        return html &amp;&amp; html.replace(/&lt;[^&gt;]*&gt;/g, &#x27;&#x27;);
+        return html &amp;&amp; html.replace(/&lt;[^&gt;]*&gt;/g, &quot;&quot;);
     }
 
 });

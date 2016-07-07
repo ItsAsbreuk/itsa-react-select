@@ -1,0 +1,40 @@
+.pure-form {
+
+    .itsa-select-required::after {
+        top: 0.2em;
+        right: 0.2em;
+        font-size: 2em;
+    }
+
+    &.pure-form-stacked .itsa-select {
+        display: block;
+        margin: 0.5em 0;
+    }
+
+    &.pure-form-aligned .itsa-select {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .itsa-select {
+        select[readonly]:focus {
+            background-color: #eee; /* menu hover bg color */
+            color: #777; /* menu text color */
+            border-color: #ccc;
+        }
+    }
+
+}
+
+@media only screen and (max-width : 480px) {
+
+    .pure-form .itsa-select {
+        margin-bottom: 0.3em;
+        display: block;
+    }
+
+    .pure-group .itsa-select {
+        margin-bottom: 0;
+    }
+
+}
