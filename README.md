@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ItsAsbreuk/COMPONENT_NAME.svg?branch=master)](https://travis-ci.org/ItsAsbreuk/itsa-react-select)
+[![Build Status](https://travis-ci.org/ItsAsbreuk/itsa-react-select.svg?branch=master)](https://travis-ci.org/ItsAsbreuk/itsa-react-select)
 
 Nice select for react.
 

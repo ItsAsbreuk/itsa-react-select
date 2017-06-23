@@ -143,14 +143,6 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_getDefaultProps">getDefaultProps</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_getInitialState">getInitialState</a>
-
-                            </li>
-                            <li class="index-item method">
                                 <a href="#method_handleClick">handleClick</a>
 
                             </li>
@@ -202,7 +194,15 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_btnRenderer">btnRenderer</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_className">className</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_closeOnClick">closeOnClick</a>
 
                             </li>
                             <li class="index-item property">
@@ -238,6 +238,10 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_multiSelect">multiSelect</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_onChange">onChange</a>
 
                             </li>
@@ -255,6 +259,10 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
                             </li>
                             <li class="index-item property">
                                 <a href="#property_style">style</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_type">type</a>
 
                             </li>
                     </ul>
@@ -291,7 +299,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l542"><code>lib&#x2F;component.jsx:542</code></a>
+        <a href="../files/lib_component.jsx.html#l413"><code>lib&#x2F;component.jsx:413</code></a>
         </p>
 
 
@@ -352,7 +360,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l555"><code>lib&#x2F;component.jsx:555</code></a>
+        <a href="../files/lib_component.jsx.html#l426"><code>lib&#x2F;component.jsx:426</code></a>
         </p>
 
 
@@ -399,7 +407,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l569"><code>lib&#x2F;component.jsx:569</code></a>
+        <a href="../files/lib_component.jsx.html#l440"><code>lib&#x2F;component.jsx:440</code></a>
         </p>
 
 
@@ -458,7 +466,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l587"><code>lib&#x2F;component.jsx:587</code></a>
+        <a href="../files/lib_component.jsx.html#l458"><code>lib&#x2F;component.jsx:458</code></a>
         </p>
 
 
@@ -515,7 +523,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l194"><code>lib&#x2F;component.jsx:194</code></a>
+        <a href="../files/lib_component.jsx.html#l63"><code>lib&#x2F;component.jsx:63</code></a>
         </p>
 
 
@@ -547,7 +555,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l216"><code>lib&#x2F;component.jsx:216</code></a>
+        <a href="../files/lib_component.jsx.html#l85"><code>lib&#x2F;component.jsx:85</code></a>
         </p>
 
 
@@ -567,7 +575,13 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
 <div id="method_focus" class="method item">
     <h3 class="name"><code>focus</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code class="optional">[transitionTime]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -580,7 +594,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l234"><code>lib&#x2F;component.jsx:234</code></a>
+        <a href="../files/lib_component.jsx.html#l103"><code>lib&#x2F;component.jsx:103</code></a>
         </p>
 
 
@@ -593,93 +607,25 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
 
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name optional">[transitionTime]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
 
 
+                    <div class="param-description">
+                        <p>transition-time to focus the element into the view</p>
 
-</div>
-<div id="method_getDefaultProps" class="method item">
-    <h3 class="name"><code>getDefaultProps</code></h3>
+                    </div>
 
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/lib_component.jsx.html#l254"><code>lib&#x2F;component.jsx:254</code></a>
-        </p>
-
-
-
-            <p>Available since 0.0.1</p>
-    </div>
-
-    <div class="description">
-        <p>Returns the default props.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                    <p>object</p>
-
-            </div>
+                </li>
+            </ul>
         </div>
 
-
-</div>
-<div id="method_getInitialState" class="method item">
-    <h3 class="name"><code>getInitialState</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/lib_component.jsx.html#l275"><code>lib&#x2F;component.jsx:275</code></a>
-        </p>
-
-
-
-            <p>Available since 0.0.1</p>
-    </div>
-
-    <div class="description">
-        <p>Returns the initial state.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                    <p>object</p>
-
-            </div>
-        </div>
 
 
 </div>
@@ -698,7 +644,7 @@ New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">htt
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l300"><code>lib&#x2F;component.jsx:300</code></a>
+        <a href="../files/lib_component.jsx.html#l126"><code>lib&#x2F;component.jsx:126</code></a>
         </p>
 
 
@@ -737,7 +683,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l289"><code>lib&#x2F;component.jsx:289</code></a>
+        <a href="../files/lib_component.jsx.html#l115"><code>lib&#x2F;component.jsx:115</code></a>
         </p>
 
 
@@ -786,7 +732,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l330"><code>lib&#x2F;component.jsx:330</code></a>
+        <a href="../files/lib_component.jsx.html#l156"><code>lib&#x2F;component.jsx:156</code></a>
         </p>
 
 
@@ -818,7 +764,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l350"><code>lib&#x2F;component.jsx:350</code></a>
+        <a href="../files/lib_component.jsx.html#l202"><code>lib&#x2F;component.jsx:202</code></a>
         </p>
 
 
@@ -850,7 +796,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l365"><code>lib&#x2F;component.jsx:365</code></a>
+        <a href="../files/lib_component.jsx.html#l217"><code>lib&#x2F;component.jsx:217</code></a>
         </p>
 
 
@@ -882,7 +828,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l393"><code>lib&#x2F;component.jsx:393</code></a>
+        <a href="../files/lib_component.jsx.html#l245"><code>lib&#x2F;component.jsx:245</code></a>
         </p>
 
 
@@ -914,7 +860,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l403"><code>lib&#x2F;component.jsx:403</code></a>
+        <a href="../files/lib_component.jsx.html#l255"><code>lib&#x2F;component.jsx:255</code></a>
         </p>
 
 
@@ -946,7 +892,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l416"><code>lib&#x2F;component.jsx:416</code></a>
+        <a href="../files/lib_component.jsx.html#l268"><code>lib&#x2F;component.jsx:268</code></a>
         </p>
 
 
@@ -981,7 +927,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l431"><code>lib&#x2F;component.jsx:431</code></a>
+        <a href="../files/lib_component.jsx.html#l283"><code>lib&#x2F;component.jsx:283</code></a>
         </p>
 
 
@@ -1022,7 +968,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l43"><code>lib&#x2F;component.jsx:43</code></a>
+        <a href="../files/lib_component.jsx.html#l473"><code>lib&#x2F;component.jsx:473</code></a>
         </p>
 
 
@@ -1048,7 +994,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l52"><code>lib&#x2F;component.jsx:52</code></a>
+        <a href="../files/lib_component.jsx.html#l482"><code>lib&#x2F;component.jsx:482</code></a>
         </p>
 
 
@@ -1057,6 +1003,33 @@ Will invoke <code>this.props.onChange</code></p>
 
     <div class="description">
         <p>ClassName that should be set to the select-button</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_btnRenderer" class="property item">
+    <h3 class="name"><code>btnRenderer</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l491"><code>lib&#x2F;component.jsx:491</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>A render-function for the buttonText. When not supplied (default),
+The selected item will be rendered as the buttonText.</p>
 
     </div>
 
@@ -1074,7 +1047,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l61"><code>lib&#x2F;component.jsx:61</code></a>
+        <a href="../files/lib_component.jsx.html#l501"><code>lib&#x2F;component.jsx:501</code></a>
         </p>
 
 
@@ -1089,6 +1062,33 @@ Will invoke <code>this.props.onChange</code></p>
 
 
 </div>
+<div id="property_closeOnClick" class="property item">
+    <h3 class="name"><code>closeOnClick</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l510"><code>lib&#x2F;component.jsx:510</code></a>
+        </p>
+
+
+            <p>Available since 15.3.32</p>
+    </div>
+
+    <div class="description">
+        <p>Whether the dropdown-list should be collapsed when an item is clicked.</p>
+
+    </div>
+
+        <p><strong>Default:</strong> true</p>
+
+
+</div>
 <div id="property_disabled" class="property item">
     <h3 class="name"><code>disabled</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
@@ -1100,7 +1100,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l70"><code>lib&#x2F;component.jsx:70</code></a>
+        <a href="../files/lib_component.jsx.html#l520"><code>lib&#x2F;component.jsx:520</code></a>
         </p>
 
 
@@ -1126,7 +1126,7 @@ Will invoke <code>this.props.onChange</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l79"><code>lib&#x2F;component.jsx:79</code></a>
+        <a href="../files/lib_component.jsx.html#l529"><code>lib&#x2F;component.jsx:529</code></a>
         </p>
 
 
@@ -1153,7 +1153,7 @@ Defaults &quot;Choose...&quot;</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l89"><code>lib&#x2F;component.jsx:89</code></a>
+        <a href="../files/lib_component.jsx.html#l539"><code>lib&#x2F;component.jsx:539</code></a>
         </p>
 
 
@@ -1179,7 +1179,7 @@ Defaults &quot;Choose...&quot;</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l98"><code>lib&#x2F;component.jsx:98</code></a>
+        <a href="../files/lib_component.jsx.html#l548"><code>lib&#x2F;component.jsx:548</code></a>
         </p>
 
 
@@ -1206,7 +1206,7 @@ This value is needed to determine if the validate-status should be set.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l108"><code>lib&#x2F;component.jsx:108</code></a>
+        <a href="../files/lib_component.jsx.html#l558"><code>lib&#x2F;component.jsx:558</code></a>
         </p>
 
 
@@ -1232,7 +1232,7 @@ This value is needed to determine if the validate-status should be set.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l117"><code>lib&#x2F;component.jsx:117</code></a>
+        <a href="../files/lib_component.jsx.html#l567"><code>lib&#x2F;component.jsx:567</code></a>
         </p>
 
 
@@ -1258,7 +1258,7 @@ This value is needed to determine if the validate-status should be set.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l126"><code>lib&#x2F;component.jsx:126</code></a>
+        <a href="../files/lib_component.jsx.html#l576"><code>lib&#x2F;component.jsx:576</code></a>
         </p>
 
 
@@ -1285,7 +1285,7 @@ This value is needed to determine if the validate-status should be set.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l136"><code>lib&#x2F;component.jsx:136</code></a>
+        <a href="../files/lib_component.jsx.html#l586"><code>lib&#x2F;component.jsx:586</code></a>
         </p>
 
 
@@ -1301,6 +1301,33 @@ when it requires a selected item yet when there is no item selected.</p>
 
 
 </div>
+<div id="property_multiSelect" class="property item">
+    <h3 class="name"><code>multiSelect</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l596"><code>lib&#x2F;component.jsx:596</code></a>
+        </p>
+
+
+            <p>Available since 15.3.32</p>
+    </div>
+
+    <div class="description">
+        <p>Whether the dropdown-list accepts multiple selected items.</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
 <div id="property_onChange" class="property item">
     <h3 class="name"><code>onChange</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
@@ -1312,7 +1339,7 @@ when it requires a selected item yet when there is no item selected.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l146"><code>lib&#x2F;component.jsx:146</code></a>
+        <a href="../files/lib_component.jsx.html#l606"><code>lib&#x2F;component.jsx:606</code></a>
         </p>
 
 
@@ -1338,7 +1365,7 @@ when it requires a selected item yet when there is no item selected.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l155"><code>lib&#x2F;component.jsx:155</code></a>
+        <a href="../files/lib_component.jsx.html#l615"><code>lib&#x2F;component.jsx:615</code></a>
         </p>
 
 
@@ -1365,7 +1392,7 @@ when it requires a selected item yet when there is no item selected.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l174"><code>lib&#x2F;component.jsx:174</code></a>
+        <a href="../files/lib_component.jsx.html#l634"><code>lib&#x2F;component.jsx:634</code></a>
         </p>
 
 
@@ -1392,7 +1419,7 @@ when it requires a selected item yet when there is no item selected.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l165"><code>lib&#x2F;component.jsx:165</code></a>
+        <a href="../files/lib_component.jsx.html#l625"><code>lib&#x2F;component.jsx:625</code></a>
         </p>
 
 
@@ -1418,7 +1445,7 @@ when it requires a selected item yet when there is no item selected.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/lib_component.jsx.html#l184"><code>lib&#x2F;component.jsx:184</code></a>
+        <a href="../files/lib_component.jsx.html#l644"><code>lib&#x2F;component.jsx:644</code></a>
         </p>
 
 
@@ -1427,6 +1454,32 @@ when it requires a selected item yet when there is no item selected.</p>
 
     <div class="description">
         <p>Inline style</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_type" class="property item">
+    <h3 class="name"><code>type</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l653"><code>lib&#x2F;component.jsx:653</code></a>
+        </p>
+
+
+            <p>Available since 0.1.2</p>
+    </div>
+
+    <div class="description">
+        <p>The tabindex of the Component.</p>
 
     </div>
 

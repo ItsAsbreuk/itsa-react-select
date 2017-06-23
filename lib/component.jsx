@@ -17,7 +17,7 @@
 require("itsa-dom");
 
 const React = require("react"),
-    PropTypes = React.PropTypes,
+    PropTypes = require("prop-types"),
     ReactDOM = require("react-dom"),
     cloneProps = require("itsa-react-clone-props"),
     FocusContainer = require("itsa-react-focuscontainer"),
@@ -37,168 +37,28 @@ const React = require("react"),
     BTN_REFOCES_TRANS_TIME = 500,
     DEF_BUTTON_PRESS_TIME = 300;
 
-const Component = React.createClass({
-
-    propTypes: {
-        /**
-         * Whether to autofocus the Component.
-         *
-         * @property autoFocus
-         * @type Boolean
-         * @since 0.0.1
-        */
-        autoFocus: PropTypes.bool,
-
-        /**
-         * ClassName that should be set to the select-button
-         *
-         * @property btnClassName
-         * @type String
-         * @since 0.0.1
-        */
-        btnClassName: PropTypes.string,
-
-        /**
-         * ClassName that should be set to the Element
-         *
-         * @property className
-         * @type String
-         * @since 0.0.1
-        */
-        className: PropTypes.string,
-
-        /**
-         * Whether the component is disabled
-         *
-         * @property disabled
-         * @type Boolean
-         * @since 0.0.1
-        */
-        disabled: PropTypes.bool,
-
-        /**
-         * The HTML that the select should show when no item is selected.
-         * Defaults "Choose..."
-         *
-         * @property emptyHTML
-         * @type String
-         * @since 0.0.1
-        */
-        emptyHTML: PropTypes.string,
-
-        /**
-         * The errormessage to show when the Select is not validated.
-         *
-         * @property errorMsg
-         * @type String
-         * @since 0.0.1
-        */
-        errorMsg: PropTypes.string,
-
-        /**
-         * Whether the parent-form has been validated.
-         * This value is needed to determine if the validate-status should be set.
-         *
-         * @property formValidated
-         * @type Boolean
-         * @since 0.0.1
-        */
-        formValidated: PropTypes.bool,
-
-        /**
-         * List with all the items, either as Strings or Objects.
-         *
-         * @property items
-         * @type Array
-         * @since 0.0.1
-        */
-        items: PropTypes.array.isRequired,
-
-        /**
-         * The height of the select-list. If not set, then all items are shown without a scroller.
-         *
-         * @property listHeight
-         * @type Number
-         * @since 0.0.1
-        */
-        listHeight: PropTypes.string,
-
-        /**
-         * Whether the loop the items when the last/first item is reached.
-         *
-         * @property loop
-         * @default false
-         * @type Boolean
-         * @since 15.0.0
-        */
-        loop: PropTypes.bool,
-
-        /**
-         * Whether the Component should show an validate-reclamation (star)
-         * when it requires a selected item yet when there is no item selected.
-         *
-         * @property markValidated
-         * @type Boolean
-         * @since 0.0.1
-        */
-        markRequired: PropTypes.bool,
-
-        /**
-         * The `onChange` function, which should update the `state`.
-         *
-         * @property onChange
-         * @type Function
-         * @since 0.0.1
-        */
-        onChange: PropTypes.func.isRequired,
-
-        /**
-         * Whether the checkbox is readonly
-         *
-         * @property readOnly
-         * @type Boolean
-         * @default false
-         * @since 15.2.0
-        */
-        readOnly: PropTypes.bool,
-
-        /**
-         * Whether to Component requires a valid selection
-         *
-         * @property required
-         * @type Boolean
-         * @since 0.0.1
-        */
-        required: PropTypes.bool,
-
-        /**
-         * The index that is selected
-         *
-         * @property readOnly
-         * @type number
-         * @default null
-         * @since 15.2.0
-        */
-        selected: PropTypes.number,
-
-        /**
-         * Inline style
-         *
-         * @property style
-         * @type object
-         * @since 0.0.1
-        */
-        style: PropTypes.object,
-
-        /**
-         * The tabindex of the Component.
-         *
-         * @property type
-         * @type Number
-         * @since 0.1.2
-        */
-        tabIndex: PropTypes.number
-    },
+class Select extends React.Component {
+    constructor(props) {
+        super(props);
+        const instance = this;
+        this.state = {
+            expanded: false,
+            btnPressed: false
+        };
+        instance.focus = instance.focus.bind(instance);
+        instance.handleContainerFocus = instance.handleContainerFocus.bind(instance);
+        instance.handleClick = instance.handleClick.bind(instance);
+        instance.handleItemClick = instance.handleItemClick.bind(instance);
+        instance.handleItemScroll = instance.handleItemScroll.bind(instance);
+        instance.handleKeyDown = instance.handleKeyDown.bind(instance);
+        instance.handleKeyUp = instance.handleKeyUp.bind(instance);
+        instance.handleMouseDown = instance.handleMouseDown.bind(instance);
+        instance.handleMouseUp = instance.handleMouseUp.bind(instance);
+        instance._defaultItemRenderer = instance._defaultItemRenderer.bind(instance);
+        instance._getUlContainerNode = instance._getUlContainerNode.bind(instance);
+        instance._handleDocumentClick = instance._handleDocumentClick.bind(instance);
+        instance._saveHTML = instance._saveHTML.bind(instance);
+    }
 
     /**
      * componentDidMount does some initialization.
@@ -220,7 +80,7 @@ const Component = React.createClass({
         if (instance.props.autoFocus) {
             instance._focusLater = later(() => instance.focus(), 50);
         }
-    },
+    }
 
     /**
      * componentWilUnmount does some cleanup.
@@ -238,7 +98,7 @@ const Component = React.createClass({
         else {
             document.removeEventListener(CLICK, instance._handleDocumentClick, true);
         }
-    },
+    }
 
     /**
      * Sets the focus on the Component.
@@ -250,42 +110,7 @@ const Component = React.createClass({
      */
     focus(transitionTime) {
         return this.refs.button.focus(transitionTime);
-    },
-
-    /**
-     * Returns the default props.
-     *
-     * @method getDefaultProps
-     * @return object
-     * @since 0.0.1
-     */
-    getDefaultProps() {
-        return {
-            autoFocus: false,
-            disabled: false,
-            emptyHTML: EMPTY_HTML,
-            errorMsg: REQUIRED_MSG,
-            formValidated: false,
-            loop: false,
-            markRequired: false,
-            readOnly: false,
-            required: false
-        };
-    },
-
-    /**
-     * Returns the initial state.
-     *
-     * @method getInitialState
-     * @return object
-     * @since 0.0.1
-     */
-    getInitialState() {
-        return {
-            expanded: false,
-            btnPressed: false
-        };
-    },
+    }
 
     /**
      * Callback that sets the focus to the descendent element by calling `focus()`
@@ -296,7 +121,7 @@ const Component = React.createClass({
      */
     handleContainerFocus(e) {
         (e.target===e.currentTarget) && this.focus();
-    },
+    }
 
     /**
      * Callback-fn for the onClick-event.
@@ -326,7 +151,7 @@ const Component = React.createClass({
                 }
             });
         }
-    },
+    }
 
     /**
      * Callback-fn when an item is clicked
@@ -335,18 +160,44 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     handleItemClick(e) {
+        let newValue, itemInt, itemPosition;
         const instance = this,
             node = e.target,
             props = instance.props,
             item = node && node.getAttribute("data-id");
         if (!props.disabled && !props.readOnly && !this._buttonDown) {
-            instance.setState({expanded: false});
-            instance.focus(true, BTN_REFOCES_TRANS_TIME);
+            if (props.closeOnClick) {
+                instance.setState({expanded: false});
+                instance.focus(true, BTN_REFOCES_TRANS_TIME);
+            }
+            else {
+                instance.refs.focuscontainer.focusElement(Array.prototype.indexOf.call(node.parentNode.querySelectorAll("li"), node));
+            }
             if (item) {
-                instance.props.onChange(parseInt(item, 10));
+                itemInt = parseInt(item, 10);
+                if (props.multiSelect) {
+                    newValue = props.selected;
+                    if (typeof newValue==="number") {
+                        newValue = [newValue];
+                    }
+                    else if (!newValue) {
+                        newValue = [];
+                    }
+                    itemPosition = newValue.indexOf(itemInt);
+                    if (itemPosition===-1) {
+                        newValue.push(itemInt);
+                    }
+                    else {
+                        newValue.splice(itemPosition, 1);
+                    }
+                }
+                else {
+                    newValue = itemInt;
+                }
+                instance.props.onChange(newValue);
             }
         }
-    },
+    }
 
     /**
      * Callback-fn when an item is scrolled by keys
@@ -361,7 +212,7 @@ const Component = React.createClass({
         if (!props.disabled && !props.readOnly && (keyCode===13)) {
             instance.handleItemClick({target: document.activeElement});
         }
-    },
+    }
 
     /**
      * Callback-fn for the onKeyDown-event.
@@ -389,7 +240,7 @@ const Component = React.createClass({
             }
         }
         instance._buttonDown = true;
-    },
+    }
 
     /**
      * Callback-fn for the onKeyUp-event.
@@ -399,7 +250,7 @@ const Component = React.createClass({
      */
     handleKeyUp() {
         this._buttonDown = false;
-    },
+    }
 
     /**
      * Callback-fn for the onMouseDown-event.
@@ -412,7 +263,7 @@ const Component = React.createClass({
         if (!props.disabled && !props.readOnly) {
             this._mouseDown = true;
         }
-    },
+    }
 
     /**
      * Callback-fn for the onMouseUp-event.
@@ -427,7 +278,7 @@ const Component = React.createClass({
                 btnPressed: false
             });
         }
-    },
+    }
 
     /**
      * React render-method --> renderes the Component.
@@ -444,12 +295,15 @@ const Component = React.createClass({
             readOnly = props.readOnly,
             expanded = state.expanded && !disabled && !readOnly,
             itemRenderer = props.itemRenderer || instance._defaultItemRenderer,
-            containerStyles = {height: props.listHeight},
+            containerStyles = {maxHeight: props.listHeight},
             selected = props.selected,
             items = props.items,
-            hasSelection = (typeof selected==="number") && (selected>=0) && (selected<items.length),
+            hasSelection = (typeof selected==="number") ?
+                           (selected>=0) && (selected<items.length) :
+                           (Array.isArray(selected) && (selected.length>0)),
             required = props.required,
-            errored = !expanded && props.formValidated && required && !hasSelection;
+            errored = !expanded && props.formValidated && required && !hasSelection,
+            btnRenderer = props.btnRenderer;
         let className = props.className,
             buttonClass = props.btnClassName,
             elementClass = MAIN_CLASS+FORM_ELEMENT_CLASS_SPACES,
@@ -475,17 +329,24 @@ const Component = React.createClass({
         // next: innerdiv which will be absolute positioned
         // also: hide the container by default --> updateUI could make it shown
         listItems = items.map((item, i) => {
-            let classname, ariaLabel, dangerouslySetInnerHTML;
+            let classname, ariaLabel, dangerouslySetInnerHTML, match;
             const renderedItem = itemRenderer(item, i);
-            if (i===selected) {
+            if (Array.isArray(selected)) {
+                match = (selected.indexOf(i)!==-1);
+            }
+            else {
+                match = (i===selected);
+            }
+            if (match) {
                 classname = "selected";
-                buttonHTML = renderedItem;
+                btnRenderer || (buttonHTML=renderedItem);
             }
             ariaLabel = instance._saveHTML(renderedItem);
             dangerouslySetInnerHTML = {__html: renderedItem};
             return (<li aria-label={ariaLabel} className={classname} dangerouslySetInnerHTML={dangerouslySetInnerHTML}
                 data-id={i} key={i} role="listitem"/>);
         });
+        btnRenderer && (buttonHTML=btnRenderer.call(instance));
         buttonHTML || (buttonHTML=props.emptyHTML);
         if (!disabled && !readOnly && (state.btnPressed || expanded)) {
             buttonClass = buttonClass ? buttonClass+" "+"itsa-button-active" : "itsa-button-active";
@@ -533,6 +394,7 @@ const Component = React.createClass({
                         keyUp={38}
                         loop={props.loop}
                         ref="focuscontainer"
+                        scrollIntoView={true}
                         selector="li[role='listitem']"
                         style={containerStyles} >
                         <ul
@@ -546,7 +408,7 @@ const Component = React.createClass({
                 {errorMsg}
             </div>
         );
-    },
+    }
 
     /**
      * Returns a html that represent the item as how it should be rendered.
@@ -559,7 +421,7 @@ const Component = React.createClass({
      */
     _defaultItemRenderer(item) {
         return item;
-    },
+    }
 
     /**
      * Returns the ul-element that contains all li-elements.
@@ -573,7 +435,7 @@ const Component = React.createClass({
         const instance = this;
         instance._ulNode || (instance._ulNode=instance._componentNode.getElementsByTagName("ul")[0]);
         return instance._ulNode;
-    },
+    }
 
     /**
      * Callback for a click on the document. Is needed to close the Component when clicked outside.
@@ -591,7 +453,7 @@ const Component = React.createClass({
                 expanded: false
             });
         }
-    },
+    }
 
     /**
      * Returns a save string
@@ -605,7 +467,211 @@ const Component = React.createClass({
     _saveHTML(html) {
         return html && html.replace(/<[^>]*>/g, "");
     }
+}
 
-});
+Select.propTypes = {
+    /**
+     * Whether to autofocus the Component.
+     *
+     * @property autoFocus
+     * @type Boolean
+     * @since 0.0.1
+    */
+    autoFocus: PropTypes.bool,
 
-module.exports = Component;
+    /**
+     * ClassName that should be set to the select-button
+     *
+     * @property btnClassName
+     * @type String
+     * @since 0.0.1
+    */
+    btnClassName: PropTypes.string,
+
+    /**
+     * A render-function for the buttonText. When not supplied (default),
+     * The selected item will be rendered as the buttonText.
+     *
+     * @property btnRenderer
+     * @type Function
+     * @since 0.0.1
+    */
+    btnRenderer: PropTypes.func,
+
+    /**
+     * ClassName that should be set to the Element
+     *
+     * @property className
+     * @type String
+     * @since 0.0.1
+    */
+    className: PropTypes.string,
+
+    /**
+     * Whether the dropdown-list should be collapsed when an item is clicked.
+     *
+     * @property closeOnClick
+     * @type Boolean
+     * @default true
+     * @since 15.3.32
+    */
+    closeOnClick: PropTypes.bool,
+
+    /**
+     * Whether the component is disabled
+     *
+     * @property disabled
+     * @type Boolean
+     * @since 0.0.1
+    */
+    disabled: PropTypes.bool,
+
+    /**
+     * The HTML that the select should show when no item is selected.
+     * Defaults "Choose..."
+     *
+     * @property emptyHTML
+     * @type String
+     * @since 0.0.1
+    */
+    emptyHTML: PropTypes.string,
+
+    /**
+     * The errormessage to show when the Select is not validated.
+     *
+     * @property errorMsg
+     * @type String
+     * @since 0.0.1
+    */
+    errorMsg: PropTypes.string,
+
+    /**
+     * Whether the parent-form has been validated.
+     * This value is needed to determine if the validate-status should be set.
+     *
+     * @property formValidated
+     * @type Boolean
+     * @since 0.0.1
+    */
+    formValidated: PropTypes.bool,
+
+    /**
+     * List with all the items, either as Strings or Objects.
+     *
+     * @property items
+     * @type Array
+     * @since 0.0.1
+    */
+    items: PropTypes.array.isRequired,
+
+    /**
+     * The height of the select-list. If not set, then all items are shown without a scroller.
+     *
+     * @property listHeight
+     * @type Number
+     * @since 0.0.1
+    */
+    listHeight: PropTypes.string,
+
+    /**
+     * Whether the loop the items when the last/first item is reached.
+     *
+     * @property loop
+     * @default false
+     * @type Boolean
+     * @since 15.0.0
+    */
+    loop: PropTypes.bool,
+
+    /**
+     * Whether the Component should show an validate-reclamation (star)
+     * when it requires a selected item yet when there is no item selected.
+     *
+     * @property markValidated
+     * @type Boolean
+     * @since 0.0.1
+    */
+    markRequired: PropTypes.bool,
+
+    /**
+     * Whether the dropdown-list accepts multiple selected items.
+     *
+     * @property multiSelect
+     * @type Boolean
+     * @default false
+     * @since 15.3.32
+    */
+    multiSelect: PropTypes.bool,
+
+    /**
+     * The `onChange` function, which should update the `state`.
+     *
+     * @property onChange
+     * @type Function
+     * @since 0.0.1
+    */
+    onChange: PropTypes.func.isRequired,
+
+    /**
+     * Whether the checkbox is readonly
+     *
+     * @property readOnly
+     * @type Boolean
+     * @default false
+     * @since 15.2.0
+    */
+    readOnly: PropTypes.bool,
+
+    /**
+     * Whether to Component requires a valid selection
+     *
+     * @property required
+     * @type Boolean
+     * @since 0.0.1
+    */
+    required: PropTypes.bool,
+
+    /**
+     * The index that is selected
+     *
+     * @property readOnly
+     * @type number
+     * @default null
+     * @since 15.2.0
+    */
+    selected: PropTypes.oneOfType([PropTypes.number, PropTypes.array]),
+
+    /**
+     * Inline style
+     *
+     * @property style
+     * @type object
+     * @since 0.0.1
+    */
+    style: PropTypes.object,
+
+    /**
+     * The tabindex of the Component.
+     *
+     * @property type
+     * @type Number
+     * @since 0.1.2
+    */
+    tabIndex: PropTypes.number
+};
+
+Select.defaultProps = {
+    autoFocus: false,
+    closeOnClick: true,
+    disabled: false,
+    emptyHTML: EMPTY_HTML,
+    errorMsg: REQUIRED_MSG,
+    formValidated: false,
+    loop: false,
+    markRequired: false,
+    multiSelect: false,
+    readOnly: false,
+    required: false
+};
+
+module.exports = Select;

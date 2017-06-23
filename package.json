@@ -1,6 +1,6 @@
 {
   "name": "itsa-react-select",
-  "version": "15.3.12",
+  "version": "16.0.0",
   "description": "Nice select for react",
   "author": [
     {
@@ -26,18 +26,19 @@
   ],
   "main": "./lib/component.jsx",
   "engines": {
-    "node": "*"
+    "node": ">=5"
   },
   "directories": {
     "css": "./css",
     "lib": "./lib"
   },
   "dependencies": {
-    "itsa-dom": "^1.1.11",
-    "itsa-react-button": "^15.2.22",
-    "itsa-react-clone-props": "^1.0.3",
-    "itsa-react-focuscontainer": "^15.0.28",
-    "itsa-utils": "^1.1.0"
+    "itsa-dom": "^1.2.0",
+    "itsa-react-button": "^16.0.0",
+    "itsa-react-clone-props": "^1.1.0",
+    "itsa-react-focuscontainer": "^16.0.0",
+    "itsa-utils": "^1.4.0",
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^15.0.1",
@@ -52,8 +53,8 @@
     "chai": "^3.5.0",
     "chai-equal-jsx": "^1.0.9",
     "css-loader": "^0.23.1",
-    "eslint": "^2.7.0",
-    "eslint-plugin-react": "^4.3.0",
+    "eslint": "^4.0.0",
+    "eslint-plugin-react": "^7.1.0",
     "file-loader": "^0.8.5",
     "istanbul": "^0.3.0",
     "jsdom": "^7.2.2",
@@ -62,9 +63,9 @@
     "mocha": "^1.21.4",
     "node-sass": "^3.4.2",
     "purecss": "^0.6.0",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
+    "react": "^15.6.1",
     "react-addons-test-utils": "^15.0.1",
+    "react-dom": "^15.6.1",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",

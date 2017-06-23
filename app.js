@@ -28,7 +28,7 @@ props = {
         ],
         className: "months",
         emptyHTML: "Choose a Month...",
-        listHeight: "40px",
+        listHeight: "80px",
         onChange(newSelected) {
             props.props1.selected = newSelected;
             render();
@@ -64,7 +64,7 @@ props = {
     }
 };
 
-const MyForm = React.createClass({
+class MyForm extends React.Component {
     render() {
         const props = this.props;
         return (
@@ -77,8 +77,7 @@ const MyForm = React.createClass({
 
         );
     }
-
-});
+}
 
 const render = () => {
     ReactDOM.render(

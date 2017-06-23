@@ -17,6 +17,7 @@ $color-required-star: #FF6A6A;
     box-sizing: border-box;
 
     .itsa-button {
+        outline: none;
         width: 100% !important;
         display: block !important;
         margin: 0 !important;
@@ -73,7 +74,6 @@ $color-required-star: #FF6A6A;
     .itsa-select-required::after {
         content: "*";
         position: absolute;
-        font-size: 2em;
         top: 0.13em;
         right: 0.23em;
         color: $color-required-star;
@@ -130,6 +130,7 @@ $color-required-star: #FF6A6A;
     }
 
     .itsa-select-container-sub {
+        overflow-x: hidden;
         position: absolute;
         left: 0;
         top: 0;
@@ -149,6 +150,7 @@ $color-required-star: #FF6A6A;
     }
 
     ul {
+        overflow-y: hidden;
         padding: 0.2em 0 0.3em;
         list-style: none;
         margin: 0;
