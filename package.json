@@ -1,6 +1,6 @@
 {
   "name": "itsa-react-select",
-  "version": "16.0.0",
+  "version": "16.0.6",
   "description": "Nice select for react",
   "author": [
     {
@@ -34,15 +34,14 @@
   },
   "dependencies": {
     "itsa-dom": "^1.2.0",
-    "itsa-react-button": "^16.0.0",
+    "itsa-react-button": "^16.0.6",
     "itsa-react-clone-props": "^1.1.0",
-    "itsa-react-focuscontainer": "^16.0.0",
+    "itsa-react-focuscontainer": "^16.0.4",
     "itsa-utils": "^1.4.0",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "react": "^15.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.6",

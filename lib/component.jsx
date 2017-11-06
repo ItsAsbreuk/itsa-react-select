@@ -68,7 +68,6 @@ class Select extends React.Component {
      */
     componentDidMount() {
         const instance = this;
-        instance._componentNode = ReactDOM.findDOMNode(instance);
         // set outside clickHandler which watches for outside clicks that will collapse the component:
         instance.IE8_EVENTS = !instance._componentNode.addEventListener;
         if (instance.IE8_EVENTS) {
@@ -109,7 +108,7 @@ class Select extends React.Component {
      * @since 0.0.1
      */
     focus(transitionTime) {
-        return this.refs.button.focus(transitionTime);
+        return this._button.focus(transitionTime);
     }
 
     /**
@@ -141,7 +140,7 @@ class Select extends React.Component {
                 btnPressed: true
             });
             instance._removeTimer && instance._removeTimer.cancel();
-            instance.refs.focuscontainer.focusActiveElement();
+            instance._focusContainer.focusActiveElement();
             // need to go async --> handleClick goes so quick, that is is before handleMouseDown
             async(() => {
                 if (!instance._mouseDown && !simulatedClick) {
@@ -171,7 +170,7 @@ class Select extends React.Component {
                 instance.focus(true, BTN_REFOCES_TRANS_TIME);
             }
             else {
-                instance.refs.focuscontainer.focusElement(Array.prototype.indexOf.call(node.parentNode.querySelectorAll("li"), node));
+                instance._focusContainer.focusElement(Array.prototype.indexOf.call(node.parentNode.querySelectorAll("li"), node));
             }
             if (item) {
                 itemInt = parseInt(item, 10);
@@ -377,6 +376,7 @@ class Select extends React.Component {
                 onKeyUp={handleKeyUp}
                 onMouseDown={handleMouseDown}
                 onMouseUp={instance.handleMouseUp}
+                ref={node => instance._componentNode = node}
                 style={props.style}
                 tabIndex={props.tabIndex} >
                 <Button
@@ -386,14 +386,14 @@ class Select extends React.Component {
                     disabled={disabled}
                     onClick={instance.handleClick}
                     readOnly={props.readOnly}
-                    ref="button" />
+                    ref={inst => instance._button = inst} />
                 <div className={containerClass} onKeyDown={itemScroll}>
                     <FocusContainer
                         className={containerSubClass}
                         keyDown={40}
                         keyUp={38}
                         loop={props.loop}
-                        ref="focuscontainer"
+                        ref={inst => instance._focusContainer = inst}
                         scrollIntoView={true}
                         selector="li[role='listitem']"
                         style={containerStyles} >

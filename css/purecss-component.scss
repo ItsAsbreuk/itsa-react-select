@@ -1,8 +1,7 @@
 .pure-form {
-
-    .itsa-select-required::after {
-        top: 0.2em;
-        right: 0.2em;
+    .itsa-select .itsa-select-required::after {
+        top: 0.1em;
+        right: 0.24em;
     }
 
     &.pure-form-stacked .itsa-select {
@@ -22,11 +21,9 @@
             border-color: #ccc;
         }
     }
-
 }
 
-@media only screen and (max-width : 480px) {
-
+@media only screen and (max-width: 480px) {
     .pure-form .itsa-select {
         margin-bottom: 0.3em;
         display: block;
@@ -35,5 +32,4 @@
     .pure-group .itsa-select {
         margin-bottom: 0;
     }
-
 }

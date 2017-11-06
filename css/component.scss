@@ -30,7 +30,7 @@ $color-required-star: #FF6A6A;
 
         &.itsa-button:active:not([disabled]):not(.readonly),
         &.itsa-button-active:not([disabled]):not(.readonly) {
-            box-shadow: 0 0 $active-depth rgba(0,0,0, $active-shade) inset !important;
+            box-shadow: 0 0 $active-depth rgba(0, 0, 0, $active-shade) inset !important;
         }
     }
 
@@ -70,16 +70,15 @@ $color-required-star: #FF6A6A;
         transition: all 0.2s ease-out 0s;
     }
 
-    .itsa-select-required:after,
     .itsa-select-required::after {
         content: "*";
         position: absolute;
-        top: 0.13em;
-        right: 0.23em;
+        top: 0.05em;
+        right: 0.18em;
+        font-size: 2em;
         color: $color-required-star;
     }
 
-    .itsa-button:after,
     .itsa-button::after {
         border-left: 0.4em solid rgba(0, 0, 0, 0);
         border-right: 0.4em solid rgba(0, 0, 0, 0);
@@ -92,7 +91,6 @@ $color-required-star: #FF6A6A;
         cursor: pointer;
     }
 
-    .itsa-button.readonly:after,
     .itsa-button.readonly::after {
         border-left: 0.4em solid rgba(119, 119, 119, 0);
         border-right: 0.4em solid rgba(119, 119, 119, 0);
@@ -142,11 +140,11 @@ $color-required-star: #FF6A6A;
         -webkit-border-radius: 0 0 0.3em 0.3em;
         -moz-border-radius: 0 0 0.3em 0.3em;
         border-radius: 0 0 0.3em 0.3em;
-        -webkit-box-shadow: 0.3em 0.3em 5px rgba(0,0,0,0.15);
-        -moz-box-shadow: 0.3em 0.3em 5px rgba(0,0,0,0.15);
-        box-shadow: 0.3em 0.3em 5px rgba(0,0,0,0.15);
+        -webkit-box-shadow: 0.3em 0.3em 5px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0.3em 0.3em 5px rgba(0, 0, 0, 0.15);
+        box-shadow: 0.3em 0.3em 5px rgba(0, 0, 0, 0.15);
         background-color: $list-container-background-color;
-        overflow: scroll;
+        overflow: auto;
     }
 
     ul {
@@ -174,7 +172,7 @@ $color-required-star: #FF6A6A;
         border: 1px solid $focus-border-color;
     }
 
-    li.selected:before {
+    li.selected::before {
         content: '*';
         font-size: 2em;
         position: absolute;
@@ -182,12 +180,10 @@ $color-required-star: #FF6A6A;
         bottom: -0.4em;
     }
 
-    li:before,
-    li:after {
+    li::before,
+    li::after {
         content: '';
         padding: 0;
         margin: 0;
     }
-
-
 }

@@ -69,7 +69,7 @@ class MyForm extends React.Component {
         const props = this.props;
         return (
             <FocusContainer
-                className="main-container"
+                className="main-container pure-form"
                 selector=".itsa-formelement">
                 <Select {...props.props1} />
                 <Select {...props.props2} />

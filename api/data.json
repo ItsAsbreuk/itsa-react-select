@@ -65,7 +65,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 85,
+            "line": 84,
             "description": "componentWilUnmount does some cleanup.",
             "itemtype": "method",
             "name": "componentWillUnmount",
@@ -75,7 +75,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 103,
+            "line": 102,
             "description": "Sets the focus on the Component.",
             "itemtype": "method",
             "name": "focus",
@@ -94,7 +94,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 115,
+            "line": 114,
             "description": "Callback that sets the focus to the descendent element by calling `focus()`",
             "itemtype": "method",
             "name": "handleContainerFocus",
@@ -111,7 +111,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 126,
+            "line": 125,
             "description": "Callback-fn for the onClick-event.\nWill invoke `this.props.onChange`",
             "itemtype": "method",
             "name": "handleClick",
@@ -121,7 +121,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 156,
+            "line": 155,
             "description": "Callback-fn when an item is clicked",
             "itemtype": "method",
             "name": "handleItemClick",
@@ -131,7 +131,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 202,
+            "line": 201,
             "description": "Callback-fn when an item is scrolled by keys",
             "itemtype": "method",
             "name": "handleItemScroll",
@@ -141,7 +141,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 217,
+            "line": 216,
             "description": "Callback-fn for the onKeyDown-event.",
             "itemtype": "method",
             "name": "handleKeyDown",
@@ -151,7 +151,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 245,
+            "line": 244,
             "description": "Callback-fn for the onKeyUp-event.",
             "itemtype": "method",
             "name": "handleKeyUp",
@@ -161,7 +161,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 255,
+            "line": 254,
             "description": "Callback-fn for the onMouseDown-event.",
             "itemtype": "method",
             "name": "handleMouseDown",
@@ -171,7 +171,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 268,
+            "line": 267,
             "description": "Callback-fn for the onMouseUp-event.",
             "itemtype": "method",
             "name": "handleMouseUp",
@@ -181,7 +181,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 283,
+            "line": 282,
             "description": "React render-method --> renderes the Component.",
             "itemtype": "method",
             "name": "render",
