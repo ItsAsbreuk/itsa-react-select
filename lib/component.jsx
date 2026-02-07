@@ -138,16 +138,22 @@ class Select extends React.Component {
             instance.setState({
                 expanded: newExpanded,
                 btnPressed: true
-            });
-            instance._removeTimer && instance._removeTimer.cancel();
-            instance._focusContainer.focusActiveElement();
-            // need to go async --> handleClick goes so quick, that is is before handleMouseDown
-            async(() => {
-                if (!instance._mouseDown && !simulatedClick) {
-                    instance._removeTimer = later(() => {
-                        instance.setState({btnPressed: false});
-                    }, DEF_BUTTON_PRESS_TIME);
+            }, () => {
+                instance._removeTimer && instance._removeTimer.cancel();
+                if (newExpanded) {
+                    instance._focusContainer.focusActiveElement();
                 }
+                else {
+                    instance.focus(true, BTN_REFOCES_TRANS_TIME);
+                }
+                // need to go async --> handleClick goes so quick, that is is before handleMouseDown
+                async(() => {
+                    if (!instance._mouseDown && !simulatedClick) {
+                        instance._removeTimer = later(() => {
+                            instance.setState({btnPressed: false});
+                        }, DEF_BUTTON_PRESS_TIME);
+                    }
+                });
             });
         }
     }
@@ -226,7 +232,8 @@ class Select extends React.Component {
             keyCode = e.keyCode;
 
         if (!props.disabled && !props.readOnly && !instance._buttonDown) {
-            if ((keyCode===27) && (state.expanded)) {
+            // if ((keyCode===27) && (state.expanded)) {
+            if (((keyCode===27) || (keyCode===8) || (keyCode===9)) && (state.expanded)) {
                 instance.setState({
                     expanded: false
                 });
@@ -390,6 +397,7 @@ class Select extends React.Component {
                 <div className={containerClass} onKeyDown={itemScroll}>
                     <FocusContainer
                         className={containerSubClass}
+                        enterKey={13}
                         keyDown={40}
                         keyUp={38}
                         loop={props.loop}
